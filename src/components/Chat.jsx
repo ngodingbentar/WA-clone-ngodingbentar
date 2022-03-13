@@ -34,7 +34,11 @@ export default function Chat() {
       </div>
 
       <div className="chat__body">
-
+        <p className={`chat__message ${true && 'chat__receiver'}`}>
+          <span className='chat__name'>Dew</span>
+          hey
+          <span className='chat__timestamp'>3:45pm</span>
+        </p>
       </div>
 
       <div className="chat__footer">
