@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyAYufU19v7GbcdH8zlSENpx_D_yslA-kR0",
   authDomain: "vuechat-9eb19.firebaseapp.com",
