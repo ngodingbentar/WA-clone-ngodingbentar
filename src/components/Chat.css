@@ -1,7 +1,19 @@
 .chat {
-  flex: 0.65;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  /* flex-direction: column; */
+}
+
+.chat__left {
+  /* background: #c0ee9d; */
+  width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.chat__left .chat__header {
+  cursor: pointer;
 }
 
 .chat__header {
@@ -58,7 +70,7 @@
   min-width: 100px;
 }
 
-.chat__body {
+.chat__left .chat__body {
   flex: 1;
   background: url(./bg-wa.png);
   background-repeat: repeat;
