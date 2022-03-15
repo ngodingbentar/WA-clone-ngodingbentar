@@ -21,7 +21,7 @@ export default function Chat() {
 
   useEffect(() => {
     setAvatar( Math.floor(Math.random() * 1000 ))
-  }, [])
+  }, [roomId])
 
   const sendMessage = (e) => {
     e.preventDefault()
