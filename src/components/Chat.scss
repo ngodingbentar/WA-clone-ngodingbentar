@@ -14,10 +14,19 @@
       }
     }
 
-    .group__description {
+    .card {
+      padding: 20px;
       background-color: white;
       margin-top: 10px;
-      padding: 10px 0;
+      text-align: left !important;
+    }
+
+    .starred {
+      flex-direction: row;
+      display: flex;
+      p {
+        margin-left: 10px;
+      }
     }
   }
 }

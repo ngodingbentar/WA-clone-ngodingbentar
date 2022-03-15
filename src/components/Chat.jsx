@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Avatar, IconButton } from '@material-ui/core'
-import { AttachFile, Close, DonutLarge, InsertEmoticon, Mic, MoreVert, SearchOutlined } from '@material-ui/icons'
+import { AttachFile, Close, DonutLarge, InsertEmoticon, Mic, MoreVert, Notifications, SearchOutlined, Star } from '@material-ui/icons'
 import './Chat.css'
 import './Chat.scss'
 import { useParams } from 'react-router-dom'
@@ -12,16 +12,22 @@ export default function Chat() {
   const [avatar, setAvatar] = useState('')
   const [input, setInput] = useState('')
   const { roomId } = useParams()
-  const [roomName, setRoomName] = useState('')
+  const [room, setRoom] = useState({})
   const [messages, setMessages] = useState([])
   const [users, setUsers] = useState()
   const [{user}, dispatch] = useStateValue()
+  const [createdRoom, setCreatedRoom] = useState('')
 
   useEffect(() => {
     if(roomId) {
       db.collection('rooms').doc(roomId).onSnapshot(snapshot => (
-        setRoomName(snapshot.data().name)
+        setRoom(snapshot.data())
       ))
+
+      var day = new Date(room.timestamp?.toDate()).getDate();
+      var month = new Date(room.timestamp?.toDate()).getMonth() + 1;
+      var year = new Date(room.timestamp?.toDate()).getFullYear();
+      setCreatedRoom(`${month}/${day}/${year}`)
 
       db.collection('rooms').doc(roomId).collection('messages').orderBy('timestamp', 'asc').onSnapshot(snapshot => (
         setMessages(snapshot.docs.map(doc => doc.data()))
@@ -38,7 +44,6 @@ export default function Chat() {
       return [...new Map(messages.map(item => [item[key], item])).values()]
     }
     
-    // const arr1 = getUniqueListBy(messages, 'uid')
     setUsers(getUniqueListBy(messages, 'uid').length)
   }, [messages])
 
@@ -54,13 +59,7 @@ export default function Chat() {
     setInput('')
   }
   const cek = () => {
-    function getUniqueListBy(messages, key) {
-        return [...new Map(messages.map(item => [item[key], item])).values()]
-    }
-    
-    const arr1 = getUniqueListBy(messages, 'uid')
-    
-    console.log("Unique by place", arr1.length)
+    console.log('room', room)
   }
 
   const [detail, setDetail] = useState(false)
@@ -75,9 +74,8 @@ export default function Chat() {
           <Avatar src={`https://avatars.dicebear.com/api/male/${avatar}.svg`} />
 
           <div className="chat__headerInfo">
-            <h3>{roomName}</h3>
+            <h3>{room.name}</h3>
             <p>{users} participants</p>
-            {/* <button onClick={openDetail}>detail</button> */}
           </div>
 
           <div className="chat__headerRight">
@@ -104,8 +102,6 @@ export default function Chat() {
             </p>
           ))}
         </div>
-
-        {/* <button onClick={cek}>cek</button> */}
 
         <div className="chat__footer">
           <InsertEmoticon />
@@ -136,13 +132,36 @@ export default function Chat() {
             <div className="avatar">
               <img src={`https://avatars.dicebear.com/api/male/${avatar}.svg`} />
               <div>
-                <h3>{roomName}</h3>
+                <h3>{room.name}</h3>
                 <p>Group - {users} participants</p>
               </div>
             </div>
 
-            <div className="group__description">
-              <p>deskripsi</p>
+            <div className="card">
+              {room.description ? (
+                <div>
+                  <p style={{color:'#00a884'}}>{room.description}</p>
+                  <p className='text-xs text-gray-1'>Created by {room.owner.name}, {createdRoom}</p>
+                </div>
+              ) : (
+                <div>
+                  <p>Add group description</p>
+                </div>
+              )}
+            </div>
+
+            <div className="card">
+              <p className='text-gray-1'>Media, links, and docs</p>
+            </div>
+
+            <div className="card starred">
+              <Star/>
+              <p className=''>Starred messages</p>
+            </div>
+
+            <div className="card starred">
+              <Notifications/>
+              <p className=''>Mute notifications</p>
             </div>
           </div>
         </div>

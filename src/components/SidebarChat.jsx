@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import { Avatar } from '@material-ui/core'
 import './SidebarChat.css'
+import firebase from 'firebase'
 import db from '../firebaseConfig'
 import { Link } from 'react-router-dom'
+import { useStateValue } from '../StateProvider'
 
 export default function SidebarChat({id, name, addNewChat}) {
   const [avatar, setAvatar] = useState('')
   const [messages, setMessages] = useState('')
+  const [{user}, dispatch] = useStateValue()
 
   useEffect(() => {
     if(id) {
@@ -26,10 +29,19 @@ export default function SidebarChat({id, name, addNewChat}) {
 
   const createChat = () => {
     const roomName = prompt("please enter name for chat")
+    console.log('user', user)
 
     if(roomName) {
       db.collection('rooms').add({
         name: roomName,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        description: 'room description',
+        owner: {
+          id: user.uid,
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+        },
       })
     }
   }
