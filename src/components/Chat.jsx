@@ -13,6 +13,7 @@ export default function Chat() {
   const { roomId } = useParams()
   const [roomName, setRoomName] = useState('')
   const [messages, setMessages] = useState([])
+  const [users, setUsers] = useState()
   const [{user}, dispatch] = useStateValue()
 
   useEffect(() => {
@@ -31,15 +32,34 @@ export default function Chat() {
     setAvatar( Math.floor(Math.random() * 1000 ))
   }, [roomId])
 
+  useEffect(() => {
+    function getUniqueListBy(messages, key) {
+      return [...new Map(messages.map(item => [item[key], item])).values()]
+    }
+    
+    // const arr1 = getUniqueListBy(messages, 'uid')
+    setUsers(getUniqueListBy(messages, 'uid').length)
+  }, [messages])
+
   const sendMessage = (e) => {
     e.preventDefault()
     db.collection('rooms').doc(roomId).collection('messages').add({
       message: input,
       name: user.displayName,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      uid: user.uid,
     })
 
     setInput('')
+  }
+  const cek = () => {
+    function getUniqueListBy(messages, key) {
+        return [...new Map(messages.map(item => [item[key], item])).values()]
+    }
+    
+    const arr1 = getUniqueListBy(messages, 'uid')
+    
+    console.log("Unique by place", arr1.length)
   }
   return (
     <div className='chat'>
@@ -49,12 +69,13 @@ export default function Chat() {
 
         <div className="chat__headerInfo">
           <h3>{roomName}</h3>
-          <p>
+          <p>{users} participants</p>
+          {/* <p>
             Last seen{' '}
             {new Date(
               messages[messages.length - 1]?.timestamp?.toDate()
             ).toUTCString()}
-          </p>
+          </p> */}
         </div>
 
         <div className="chat__headerRight">
@@ -72,7 +93,7 @@ export default function Chat() {
 
       <div className="chat__body">
         {messages.map((message) => (
-          <p key={message.timestamp} className={`chat__message ${message.name === user.displayName && 'chat__receiver'}`}>
+          <p key={message.timestamp} className={`chat__message ${message.uid === user.uid && 'chat__receiver'}`}>
             <span className='chat__name'>{message.name}</span>
             {message.message}
             <span className='chat__timestamp'>
@@ -82,13 +103,15 @@ export default function Chat() {
         ))}
       </div>
 
+      <button onClick={cek}>cek</button>
+
       <div className="chat__footer">
         <InsertEmoticon />
         <form>
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder='Type a message'
+            placeholder='Message'
             type='text' />
           <button
             onClick={sendMessage}
