@@ -20,9 +20,9 @@ function App() {
               <Route path="/rooms/:roomId">
                 <Chat />
               </Route>
-              <Route path="/">
+              {/* <Route path="/">
                 <Chat />
-              </Route>
+              </Route> */}
             </Switch>
           </Router>
         </div>
