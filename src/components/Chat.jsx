@@ -33,8 +33,6 @@ export default function Chat() {
 
   const sendMessage = (e) => {
     e.preventDefault()
-    console.log('your type =>', input, user.displayName)
-
     db.collection('rooms').doc(roomId).collection('messages').add({
       message: input,
       name: user.displayName,
