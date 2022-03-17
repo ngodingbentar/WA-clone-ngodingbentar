@@ -14,6 +14,7 @@ export default function Chat() {
   const { roomId } = useParams()
   const [room, setRoom] = useState({})
   const [messages, setMessages] = useState([])
+  const [datas, setDatas] = useState([])
   const [users, setUsers] = useState()
   const [{user}, dispatch] = useStateValue()
   const [createdRoom, setCreatedRoom] = useState('')
@@ -45,6 +46,9 @@ export default function Chat() {
     }
     
     setUsers(getUniqueListBy(messages, 'uid').length)
+    setDatas(getUniqueListBy(messages, 'uid'))
+    console.log('datas', datas)
+    console.log('users', getUniqueListBy(messages, 'uid'))
   }, [messages])
 
   const sendMessage = (e) => {
@@ -54,12 +58,13 @@ export default function Chat() {
       name: user.displayName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       uid: user.uid,
+      photoUrl: user.photoURL,
     })
 
     setInput('')
   }
   const cek = () => {
-    console.log('room', room)
+    console.log('room', user)
   }
 
   const [detail, setDetail] = useState(false)
@@ -188,6 +193,13 @@ export default function Chat() {
               <Link/>
               <p>Invite to group via link</p>
             </div>
+
+            {datas.map((user) => (
+              <div className='flex-row icon-fill mt-4'>
+                <img className='photo' src={user.photoUrl} />
+                <p>{user.name}</p>
+              </div>
+            ))}
           </div>
 
         </div>
