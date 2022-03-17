@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Avatar, IconButton } from '@material-ui/core'
-import { AttachFile, Close, DonutLarge, InsertEmoticon, Link, Mic, MoreVert, Notifications, PersonAddDisabledRounded, PersonAddOutlined, PersonAddRounded, SearchOutlined, Star } from '@material-ui/icons'
+import { AttachFile, Close, DonutLarge, ExitToApp, InsertEmoticon, Link, Mic, MoreVert, Notifications, PersonAddDisabledRounded, PersonAddOutlined, PersonAddRounded, Report, SearchOutlined, Star, ThumbDown } from '@material-ui/icons'
 import './Chat.css'
 import './Chat.scss'
 import { useParams } from 'react-router-dom'
@@ -200,6 +200,18 @@ export default function Chat() {
                 <p>{user.name}</p>
               </div>
             ))}
+          </div>
+
+          <div className="card">
+            <div className='item text-red red flex-row'>
+              <ExitToApp/>
+              <p className=''>Exit group</p>
+            </div>
+
+            <div className='item text-red flex-row'>
+              <ThumbDown/>
+              <p className=''>Report group</p>
+            </div>
           </div>
 
         </div>

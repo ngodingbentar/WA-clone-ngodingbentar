@@ -36,3 +36,7 @@
 .mt-4 {
   margin-top: 1rem; /* 16px */
 }
+
+.text-red {
+  color: red;
+}
