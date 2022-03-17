@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Avatar, IconButton } from '@material-ui/core'
-import { AttachFile, Close, DonutLarge, InsertEmoticon, Link, Mic, MoreVert, Notifications, PersonAddDisabledRounded, PersonAddOutlined, PersonAddRounded, SearchOutlined, Star } from '@material-ui/icons'
+import { AttachFile, Close, DonutLarge, InsertEmoticon, Mic, MoreVert, Notifications, SearchOutlined, Star } from '@material-ui/icons'
 import './Chat.css'
 import './Chat.scss'
 import { useParams } from 'react-router-dom'
@@ -128,70 +128,57 @@ export default function Chat() {
             </IconButton>
             <h3>Group info</h3>
           </div>
-
-        <div className="chat__body">
-          <div className="avatar">
-            <img src={`https://avatars.dicebear.com/api/male/${avatar}.svg`} />
-            <div>
-              <h3>{room.name}</h3>
-              <p>Group - {users} participants</p>
-            </div>
-          </div>
-          <div className="card">
-            {room.description ? (
+          <div className="chat__body">
+            <div className="avatar">
+              <img src={`https://avatars.dicebear.com/api/male/${avatar}.svg`} />
               <div>
-                <p style={{color:'#00a884'}}>{room.description}</p>
-                <p className='text-xs text-gray-1'>Created by {room.owner.name}, {createdRoom}</p>
+                <h3>{room.name}</h3>
+                <p>Group - {users} participants</p>
               </div>
-            ) : (
-              <div>
-                <p>Add group description</p>
+            </div>
+
+            <div className="card">
+              {room.description ? (
+                <div>
+                  <p style={{color:'#00a884'}}>{room.description}</p>
+                  <p className='text-xs text-gray-1'>Created by {room.owner.name}, {createdRoom}</p>
+                </div>
+              ) : (
+                <div>
+                  <p>Add group description</p>
+                </div>
+              )}
+            </div>
+
+            <div className="card">
+              <p className='text-gray-1'>Media, links, and docs</p>
+            </div>
+
+            <div className="card starred">
+              <Star/>
+              <p className=''>Starred messages</p>
+            </div>
+
+            <div className="card">
+              <div className='flex-row'>
+                <Notifications/>
+                <p className=''>Mute notifications</p>
               </div>
-            )}
-          </div>
-          <div className="card">
-            <p className='text-gray-1'>Media, links, and docs</p>
-          </div>
-
-          <div className="card flex-row">
-            <Star/>
-            <p className=''>Starred messages</p>
-          </div>
-
-          <div className="card">
-            <div className='item flex-row'>
-              <Notifications/>
-              <p className=''>Mute notifications</p>
-            </div>
-            <div className='item flex-row'>
-              <Notifications/>
-              <p className=''>Disappearing messages</p>
-            </div>
-            <div className='item flex-row'>
-              <Notifications/>
-              <p className=''>Group setting</p>
+              <div className='flex-row'>
+                <Notifications/>
+                <p className=''>Mute notifications</p>
+              </div>
+              <div className='flex-row'>
+                <Notifications/>
+                <p className=''>Mute notifications</p>
+              </div>
+              <div className='flex-row'>
+                <Notifications/>
+                <p className=''>Mute notifications</p>
+              </div>
             </div>
           </div>
-
-          <div className="card participants">
-            <div className='flex-row search'>
-              <p className='text-sm'>{users} participants</p>
-              <SearchOutlined />
-            </div>
-
-            <div className='icon-fill mt-4'>
-              <PersonAddRounded/>
-              <p>Add participant</p>
-            </div>
-
-            <div className='icon-fill mt-4'>
-              <Link/>
-              <p>Invite to group via link</p>
-            </div>
-          </div>
-
         </div>
-      </div>
       )}
     </div>
   )

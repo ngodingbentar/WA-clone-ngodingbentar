@@ -1,9 +1,18 @@
+
 .chat__right {
-  width: 40%;
-  border-left: 2px solid rgb(218, 214, 214);
+  /* background: #c0ee9d; */
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+
+  .chat__header {
+    cursor: pointer;
+  }
 
   .chat__body {
     text-align: center;
+    flex: 1;
+    overflow-x: scroll;
 
     .avatar {
       padding: 20px 0;
@@ -14,16 +23,36 @@
       }
     }
 
+    .participants {
+      .search {
+        justify-content: space-between;
+      }
+
+      .icon-fill {
+        display: flex;
+        p {
+          margin: auto 0;
+          padding-left: 10px;
+        }
+        svg {
+          background-color: #00a884;
+          color: white;
+          padding: 10px;
+          border-radius: 50%;
+        }
+      }
+    }
+
     .card {
       padding: 20px;
       background-color: white;
       margin-top: 10px;
       text-align: left !important;
-    }
 
-    .starred {
-      flex-direction: row;
-      display: flex;
+      .item {
+        padding: 10px 0;
+      }
+
       p {
         margin-left: 10px;
       }

@@ -19,6 +19,20 @@
   line-height: 1rem; /* 16px */
 }
 
+.text-sm {
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+}
+
 .text-gray-1 {
   color: #667781;
+}
+
+.flex-row {
+  flex-direction: row;
+  display: flex;
+}
+
+.mt-4 {
+  margin-top: 1rem; /* 16px */
 }
