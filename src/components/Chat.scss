@@ -12,7 +12,7 @@
   .chat__body {
     text-align: center;
     flex: 1;
-    overflow-x: scroll;
+    overflow-y: scroll;
 
     .avatar {
       padding: 20px 0;
@@ -56,6 +56,9 @@
 
       .item {
         padding: 10px 0;
+        svg {
+          margin: auto 0;
+        }
       }
 
       p {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Avatar, IconButton } from '@material-ui/core'
-import { AttachFile, Close, DonutLarge, ExitToApp, InsertEmoticon, Link, Mic, MoreVert, Notifications, PersonAddDisabledRounded, PersonAddOutlined, PersonAddRounded, Report, SearchOutlined, Star, ThumbDown } from '@material-ui/icons'
+import { AttachFile, AvTimer, Close, DonutLarge, ExitToApp, InsertEmoticon, Link, Mic, MoreVert, Notifications, PersonAddDisabledRounded, PersonAddOutlined, PersonAddRounded, Report, SearchOutlined, Settings, Star, ThumbDown } from '@material-ui/icons'
 import './Chat.css'
 import './Chat.scss'
 import { useParams } from 'react-router-dom'
@@ -169,11 +169,11 @@ export default function Chat() {
               <p className=''>Mute notifications</p>
             </div>
             <div className='item flex-row'>
-              <Notifications/>
-              <p className=''>Disappearing messages</p>
+              <AvTimer/>
+              <p className=''>Disappearing messages <span style={{display:"block"}}>Off</span></p>
             </div>
             <div className='item flex-row'>
-              <Notifications/>
+              <Settings/>
               <p className=''>Group setting</p>
             </div>
           </div>
@@ -203,12 +203,12 @@ export default function Chat() {
           </div>
 
           <div className="card">
-            <div className='item text-red red flex-row'>
+            <div className='item text-red flex-row clicked'>
               <ExitToApp/>
               <p className=''>Exit group</p>
             </div>
 
-            <div className='item text-red flex-row'>
+            <div className='item text-red flex-row clicked'>
               <ThumbDown/>
               <p className=''>Report group</p>
             </div>

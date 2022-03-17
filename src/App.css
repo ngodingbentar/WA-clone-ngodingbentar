@@ -8,10 +8,10 @@
 .app__body {
   display: flex;
   background-color: #ededed;
-  margin-top: -50px;
-  height: 90vh;
-  width: 90vw;
+  height: 95vh;
+  width: 91vw;
   box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.4);
+  z-index: 2;
 }
 
 .text-xs {
@@ -39,4 +39,17 @@
 
 .text-red {
   color: red;
+}
+
+.clicked:hover {
+  cursor: pointer;
+}
+
+.bg-green {
+  height: 127px;
+  background-color: #00a884;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  z-index: 1;
 }

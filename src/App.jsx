@@ -10,6 +10,7 @@ function App() {
   const [{user}, dispatch] = useStateValue()
   return (
     <div className="app">
+      <div className='bg-green'></div>
       {!user ? (
        <Login/>
       ) : (
