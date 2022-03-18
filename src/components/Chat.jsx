@@ -47,8 +47,6 @@ export default function Chat() {
     
     setUsers(getUniqueListBy(messages, 'uid').length)
     setDatas(getUniqueListBy(messages, 'uid'))
-    console.log('datas', datas)
-    console.log('users', getUniqueListBy(messages, 'uid'))
   }, [messages])
 
   const sendMessage = (e) => {
@@ -194,8 +192,8 @@ export default function Chat() {
               <p>Invite to group via link</p>
             </div>
 
-            {datas.map((user) => (
-              <div className='flex-row icon-fill mt-4'>
+            {datas.map((user, index) => (
+              <div key={index} className='flex-row icon-fill mt-4'>
                 <img className='photo' src={user.photoUrl} />
                 <p>{user.name}</p>
               </div>

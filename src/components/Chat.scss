@@ -26,6 +26,9 @@
     .participants {
       .search {
         justify-content: space-between;
+        p {
+          margin-left: 0 !important;
+        }
       }
 
       .icon-fill {
