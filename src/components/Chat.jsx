@@ -88,10 +88,7 @@ export default function Chat() {
 
           <div className="chat__headerRight">
             <IconButton>
-              <DonutLarge />
-            </IconButton>
-            <IconButton>
-              <AttachFile />
+              <SearchOutlined />
             </IconButton>
             <IconButton>
               <MoreVert />
