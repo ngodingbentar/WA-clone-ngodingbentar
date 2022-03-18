@@ -9,7 +9,7 @@ import { useStateValue } from '../StateProvider'
 export default function SidebarChat({id, name, addNewChat}) {
   const [avatar, setAvatar] = useState('')
   const [messages, setMessages] = useState('')
-  const [{user}, dispatch] = useStateValue()
+  const [{user, activeTab}, dispatch] = useStateValue()
 
   useEffect(() => {
     if(id) {
@@ -47,7 +47,7 @@ export default function SidebarChat({id, name, addNewChat}) {
   }
   return !addNewChat ? (
     <Link to={`/rooms/${id}`}>
-      <div className='sidebarChat'>
+      <div className={`sidebarChat ${activeTab === id ? 'active' : ''}`}>
         <Avatar src={`https://avatars.dicebear.com/api/male/${avatar}.svg`} />
         <div className="sidebarChat__info">
           <h2>{name}</h2>

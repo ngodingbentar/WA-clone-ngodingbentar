@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import db from '../firebaseConfig'
 import firebase from 'firebase'
 import { useStateValue } from '../StateProvider'
+import { actionTypes } from '../reducer';
 
 export default function Chat() {
   const [avatar, setAvatar] = useState('')
@@ -21,6 +22,10 @@ export default function Chat() {
 
   useEffect(() => {
     if(roomId) {
+      dispatch({
+        type: actionTypes.SET_ACTIVE,
+        activeTab: roomId
+      })
       db.collection('rooms').doc(roomId).onSnapshot(snapshot => (
         setRoom(snapshot.data())
       ))

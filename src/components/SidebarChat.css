@@ -5,6 +5,10 @@
   border-bottom: 1px solid #f6f6f6;
 }
 
+.active {
+  background-color: #ebebeb;
+}
+
 a {
   text-decoration: none !important;
   color: black;
